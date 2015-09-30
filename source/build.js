@@ -7,6 +7,8 @@ import assets from 'metalsmith-assets';
 import replace from 'metalsmith-text-replace';
 import navigation from 'metalsmith-navigation';
 
+import markdown from 'metalsmith-markdownit';
+
 // ************************************************************
 // Configure Navigation
 // ************************************************************
@@ -101,6 +103,16 @@ const replacePatterns = [
 
 
 // ************************************************************
+// Configure Markdow parser
+// ************************************************************
+
+const md = markdown({
+  html: true,
+});
+
+
+
+// ************************************************************
 // Configure metalsmith
 // ************************************************************
 
@@ -112,6 +124,7 @@ metalsmith( sourceFolder )
 .clean( true )
 .metadata( meta )
 .use( replace({ '**/**': replacePatterns } ) )
+.use( md )
 .use( navTask )
 .use( templatesTask )
 .use( assetsTask )
