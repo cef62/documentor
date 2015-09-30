@@ -1,6 +1,7 @@
-function hello(name) {
-  return `Hello, ${name || 'Anonymous'}!`;
-}
+require('babel/register');
+// require('source-map-support/register');
 
 
-export default hello;
+// load your app
+require('./build.js');
+
