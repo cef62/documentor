@@ -11,6 +11,7 @@ import markdown from './config/markdown';
 import markdownInlineMacros from './config/markdown/inline-macros';
 
 import composeMeta from './config/meta';
+import configureLunr from './config/lunr';
 
 // ************************************************************
 // Configure Navigation
@@ -75,6 +76,13 @@ const customListStyle = {
 // TODO: remove test style
 const md = markdown(markdownInlineMacros, [ customListStyle ]);
 
+
+// ************************************************************
+// Configure Lunr
+// ************************************************************
+
+const lunr = configureLunr();
+
 // ************************************************************
 // Configure metalsmith
 // ************************************************************
@@ -92,6 +100,7 @@ metalsmith( sourceFolder )
 .use( navTask )
 .use( templatesTask )
 .use( assetsTask )
+.use( lunr )
 .build((err) => {
   if (err) {
     throw err;
