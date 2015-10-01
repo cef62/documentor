@@ -10,6 +10,7 @@ import navigation from './config/navigation';
 import markdown from './config/markdown';
 import markdownInlineMacros from './config/markdown/inline-macros';
 
+import composeMeta from './config/meta';
 
 // ************************************************************
 // Configure Navigation
@@ -22,6 +23,7 @@ const navTask = navigation();
 // Configure assets path mapping
 // ************************************************************
 
+// TODO: configure from outside, if required
 const assetsTask = assets({
   source: './assets',
   destination: './assets',
@@ -38,25 +40,14 @@ const templatesTask = templates();
 // Configure metadata
 // ************************************************************
 
-const meta = {
-  title: 'Digital Lighting Docs',
-  description: 'Documentation for Digital Lighting projects',
-  // used by metalsmith-templates
-  partials: {
-    breadcrumbs: '_breadcrumbs',
-    nav_global: '_nav_global',
-    nav_mobile: '_nav_mobile',
-    nav_relative: '_nav_relative',
-    nav_footer: '_nav_footer',
-    nav__children: '_nav__children',
-  },
-};
-
+// TODO: pass values from outside, if any
+const meta = composeMeta();
 
 // ************************************************************
 // manual patterns substitution
 // ************************************************************
 
+// TODO: pass values from outside, if any
 const replaceTask = replace();
 
 // ************************************************************
@@ -80,12 +71,15 @@ const customListStyle = {
   type: 0x2B,
 }
 
+// TODO: pass values from outside, if any
+// TODO: remove test style
 const md = markdown(markdownInlineMacros, [ customListStyle ]);
 
 // ************************************************************
 // Configure metalsmith
 // ************************************************************
 
+// TODO: pass values from outside, REQUIRED
 const sourceFolder = path.join(__dirname, 'data');
 const buildFolder = path.join(__dirname, 'build');
 

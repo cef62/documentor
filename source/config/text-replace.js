@@ -16,6 +16,6 @@ const replacePatterns = [
 ];
 const defaultPatterns = { '**/**': replacePatterns };
 
-const configureReplace = (patterns) => replace( Object.assign(defaultPatterns, patterns) );
+const configureReplace = (patterns) => replace( Object.assign({}, defaultPatterns, patterns) );
 
 export default configureReplace;
