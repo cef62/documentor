@@ -59,12 +59,17 @@
   },
   "dependencies": {
     "handlebars": "^4.0.3",
+    "markdown-it-checkbox": "^1.1.0",
+    "markdown-it-container": "^1.0.0",
+    "markdown-it-emoji": "^1.1.0",
+    "markdown-it-footnote": "^1.0.0",
     "metalsmith": "^2.1.0",
     "metalsmith-assets": "^0.1.0",
     "metalsmith-markdownit": "^0.1.2",
     "metalsmith-navigation": "^0.2.4",
     "metalsmith-permalinks": "^0.4.0",
     "metalsmith-templates": "^0.7.0",
-    "metalsmith-text-replace": "^1.0.1"
+    "metalsmith-text-replace": "^1.0.1",
+    "prismjs": "0.0.1"
   }
 }
