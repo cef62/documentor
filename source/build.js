@@ -5,7 +5,8 @@ import metalsmith from 'metalsmith';
 import templates from 'metalsmith-templates';
 import assets from 'metalsmith-assets';
 import replace from 'metalsmith-text-replace';
-import navigation from 'metalsmith-navigation';
+
+import navigation from './config/navigation';
 
 import markdown from './config/markdown';
 import markdownInlineMacros from './config/markdown/inline-macros';
@@ -15,22 +16,8 @@ import markdownInlineMacros from './config/markdown/inline-macros';
 // Configure Navigation
 // ************************************************************
 
-const navConfigs = {
-  primary: {
-    sortBy: 'nav_sort',
-    filterProperty: 'nav_groups',
-  },
-  footer: {
-    sortBy: 'nav_sort',
-    filterProperty: 'nav_groups',
-  },
-};
-
-const navSettings = {
-  navListProperty: 'navs',
-};
-
-const navTask = navigation(navConfigs, navSettings);
+// TODO: pass values from outside, if any
+const navTask = navigation();
 
 // ************************************************************
 // Configure assets path mapping
