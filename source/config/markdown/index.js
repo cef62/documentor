@@ -8,6 +8,7 @@ import mdMacros from './markdown-it-inline-macros';
 import { highlightMarkdown, configurePrism } from './prism';
 import customListStyle, { PLUS_BULLET, STAR_BULLET, MINUS_BULLET } from './markdown-it-custom-list-style';
 import cx from './markdown-it-container-cx';
+import spoiler from './markdown-it-container-spoiler';
 
 import uniq from 'lodash.uniq';
 
@@ -39,6 +40,7 @@ export default function configureMarkdown(macros = {}, styles = [], extraPlugins
   .use( mdEmoji )
   .use( mdFootnote )
   .use( mdContainer, 'cx', cx )
+  .use( mdContainer, 'spoiler', spoiler )
   .use( mdCheckbox ) // vedi opzioni per aggiungere custom classes
   .use( mdMacros, macros );
 
