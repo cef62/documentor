@@ -3,5 +3,5 @@ require('babel/register');
 
 
 // load your app
-require('./build.js');
+require('./build');
 
