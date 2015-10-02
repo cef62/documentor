@@ -3,6 +3,7 @@ import path from 'path';
 import metalsmith from 'metalsmith';
 import assets from 'metalsmith-assets';
 import draft from 'metalsmith-drafts';
+import babel from 'metalsmith-babel';
 
 import replace from './config/text-replace';
 
@@ -97,6 +98,15 @@ const lunrStore = lunrMetadataStore({
 });
 
 // ************************************************************
+// Configure babel transpiler
+// ************************************************************
+
+const babelTastk = babel({
+  sourceMaps: 'both',
+  stage: 0,
+});
+
+// ************************************************************
 // Configure metalsmith
 // ************************************************************
 
@@ -116,6 +126,7 @@ metalsmith( sourceFolder )
 .use( assetsTask )
 .use( lunr )
 .use( lunrStore )
+.use( babelTastk )
 .build((err) => {
   if (err) {
     throw err;
