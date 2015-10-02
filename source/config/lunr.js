@@ -1,14 +1,15 @@
 import mLunr from 'metalsmith-lunr';
 import lunr from 'lunr';
 import lunrStemmerSupport from 'lunr-languages/lunr.stemmer.support';
-import lunrNo from 'lunr-languages/lunr.no';
+import lunrNo from 'lunr-languages/lunr.it';
 
 lunrStemmerSupport(lunr);
 lunrNo(lunr);
 
 export default function configureLunr() {
   return mLunr({
-    ref: 'title',
+    // ref: 'id', // important: use default (filePath) to match with
+    // lunr-metadata-store
     indexPath: 'index.json',
     fields: {
       title: 1,
@@ -21,9 +22,12 @@ export default function configureLunr() {
       // lunr.no.stopWordFilter,
       // lunr.no.stemmer
     ],
-    preprocess: function(content) {
+    preprocess(content) {
+      // if(this.nav_path && this.nav_path.indexOf('flat_progress_bar') > -1) {
+      //   console.log(this);
+      // }
       // Replace all occurrences of __title__ with the current file's title metadata.
       return content.replace(/__title__/g, this.title);
-    }
+    },
   });
 }

@@ -74,6 +74,7 @@
     "metalsmith-permalinks": "^0.4.0",
     "metalsmith-templates": "^0.7.0",
     "metalsmith-text-replace": "^1.0.1",
+    "minimatch": "^3.0.0",
     "prismjs": "0.0.1"
   }
 }

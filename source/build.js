@@ -2,6 +2,7 @@ import path from 'path';
 
 import metalsmith from 'metalsmith';
 import assets from 'metalsmith-assets';
+
 import replace from './config/text-replace';
 
 import templates from './config/templates';
@@ -12,6 +13,7 @@ import markdownInlineMacros from './config/markdown/inline-macros';
 
 import composeMeta from './config/meta';
 import configureLunr from './config/lunr';
+import lunrMetadataStore from './config/metalsmith-lunr-metadata-store';
 
 // ************************************************************
 // Configure Navigation
@@ -70,7 +72,7 @@ const customListStyle = {
     },
   },
   type: 0x2B,
-}
+};
 
 // TODO: pass values from outside, if any
 // TODO: remove test style
@@ -82,6 +84,16 @@ const md = markdown(markdownInlineMacros, [ customListStyle ]);
 // ************************************************************
 
 const lunr = configureLunr();
+const lunrStore = lunrMetadataStore({
+  fields: {
+    enable: 'lunr',
+    id: null, // null to use file path
+    metadata: {
+      title: 'title',
+      search_url: 'url',
+    },
+  },
+});
 
 // ************************************************************
 // Configure metalsmith
@@ -101,6 +113,7 @@ metalsmith( sourceFolder )
 .use( templatesTask )
 .use( assetsTask )
 .use( lunr )
+.use( lunrStore )
 .build((err) => {
   if (err) {
     throw err;
