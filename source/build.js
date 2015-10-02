@@ -2,6 +2,7 @@ import path from 'path';
 
 import metalsmith from 'metalsmith';
 import assets from 'metalsmith-assets';
+import draft from 'metalsmith-drafts';
 
 import replace from './config/text-replace';
 
@@ -107,6 +108,7 @@ metalsmith( sourceFolder )
 .destination( buildFolder )
 .clean( true )
 .metadata( meta )
+.use( draft() )
 .use( replaceTask )
 .use( md )
 .use( navTask )
