@@ -102,7 +102,7 @@ const lunrStore = lunrMetadataStore({
 // ************************************************************
 
 const babelTastk = babel({
-  sourceMaps: 'both',
+  sourceMaps: true,
   stage: 0,
 });
 
