@@ -26,15 +26,12 @@ build/Release
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
 
-build
-.validate.json
-.jshintrc
-.jshintignore
-
 # dev related files
+#build
 example/
 test/
 source/
+.validate.json
 .travis.yml
 .vimsession
 .babelrc
