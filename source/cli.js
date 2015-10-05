@@ -9,14 +9,15 @@ import { getDefaultOptions } from './config/defaults';
 
 const { config } = yargs.argv;
 let options;
+let fullPath;
 
 if (config) {
   try {
-    const fullPath = slash(path.resolve(process.cwd(), config));
+    fullPath = slash(path.resolve(process.cwd(), config));
     options = require(fullPath);
   } catch(err) {
     // console.error(err);
-    throw new Error(`Documentor CLI expect a valid path to a config modules, received: ${config}`);
+    throw new Error(`Documentor CLI expect a valid path to a config modules, received: ${fullPath}`);
   }
 } else {
   options = getDefaultOptions();

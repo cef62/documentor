@@ -18,7 +18,6 @@ export default function documentor(opt) {
     assets = [],
     navigation: { config, options } = {},
   } = opt;
-
   const metal = metalsmith( source )
   .destination( build )
   .clean( true )
