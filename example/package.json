@@ -1,0 +1,20 @@
+{
+  "name": "documentor-cli-example",
+  "version": "0.0.0",
+  "description": "Example using documentor from cli",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf build dist",
+    "build:es6": "npm run clean && node ../index-cli.js --config ./index.js",
+    "copy:files": "mkdir ./dist/data && cp -r ./data ./dist/",
+    "compile:es5": "babel index.js inline-macros.js --out-dir dist/",
+    "build:es5": "npm run clean && npm run compile:es5 && npm run copy:files && node ../build/cli.js --config ./dist/index.js"
+  },
+  "author": "Matteo Ronchi <matteo.ronchi@gmail.com> (http://www.unshift.xyz)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "5.8.21",
+    "babel-plugin-object-assign": "1.2.1",
+    "rimraf": "2.4.2"
+  }
+}

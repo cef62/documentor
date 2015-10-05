@@ -1,0 +1,79 @@
+<html ng-app="DemoApp">
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{relative_path nav_path "assets/css/prism/prism-funky.css"}}" rel="stylesheet">
+    <link href="{{relative_path nav_path "assets/css/custom.css"}}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+  <ul id="slide-out" class="side-nav fixed">
+
+    <div id="search-box"></div>
+      {{> nav_mobile}}
+  </ul>
+
+  <a href="#" data-activates="slide-out" class="button-collapse"
+  style="position:fixed; z-index:998; left: 10px; top: 10px">
+      <i class="mdi-navigation-menu" style="font-size: 40px"></i>
+  </a>
+
+  <main>
+    <div class="container main-view">
+        {{> breadcrumbs}}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well well-sm">
+                    {{{contents}}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Digital Lighting</h5>
+            <p class="grey-text text-lighten-4">DL-Components: a set of React components to quickly build UI</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Doc</h5>
+            {{> nav_footer}}
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2015 Copyright <a href="http://digitallighting.it/">Digital Lighting</a>
+        <a class="grey-text text-lighten-4 right"
+         mailto="info@digitallighting.com">info@digitallighting.com</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.25/browser-polyfill.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.12/lunr.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.7.0/axios.min.js"></script>
+
+
+<script src="{{relative_path nav_path "assets/js/components/search-box.js"}}"></script>
+
+<script>
+
+// Initialize collapse button
+$(".button-collapse").sideNav();
+
+// Initialize collapsible (uncomment the line below if you use the dropdown variation)
+//$('.collapsible').collapsible();
+
+</script>
+</body>
+</html>
