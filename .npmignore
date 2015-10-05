@@ -31,4 +31,14 @@ build
 .jshintrc
 .jshintignore
 
+# dev related files
 example/
+test/
+.travis.yml
+.vimsession
+.babelrc
+.editorconfig
+.eslintrc
+.jshintignore
+.jshintrc
+

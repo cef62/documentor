@@ -27,7 +27,6 @@
     "precheck": "npm run validate",
     "check": "npm run audit && npm run deps && npm outdated --depth 0"
   },
-  "files": [ "build", "docs", "bin"],
   "devDependencies": {
     "babel": "5.8.21",
     "babel-eslint": "4.0.5",
