@@ -4,7 +4,15 @@ export const PLUS_BULLET = 0x2B;
 export const STAR_BULLET = 0x2A;
 export const MINUS_BULLET = 0x2D;
 
-const isValidType = (type) => type === PLUS_BULLET || type === STAR_BULLET || type === MINUS_BULLET;
+const isValidType = (type) => {
+  let typeToValidate = type;
+  if (typeof type === 'string') {
+    typeToValidate = type.charCodeAt(0);
+  }
+  return typeToValidate === PLUS_BULLET
+    || typeToValidate === STAR_BULLET
+      || typeToValidate === MINUS_BULLET;
+};
 
 
 const defaultRender = (...rest) => rest[rest.length - 1].renderToken(...rest);
