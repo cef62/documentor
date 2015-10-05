@@ -34,6 +34,7 @@ build
 # dev related files
 example/
 test/
+source/
 .travis.yml
 .vimsession
 .babelrc
