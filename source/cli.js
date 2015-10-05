@@ -15,7 +15,7 @@ if (config) {
   try {
     fullPath = slash(path.resolve(process.cwd(), config));
     options = require(fullPath);
-  } catch(err) {
+  } catch (err) {
     // console.error(err);
     throw new Error(`Documentor CLI expect a valid path to a config modules, received: ${fullPath}`);
   }
