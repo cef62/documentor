@@ -2,9 +2,9 @@
   "name": "documentor",
   "description": "Make documentation for Web projects",
   "version": "0.1.0",
-  "main": "./build/build.js",
+  "main": "build/build.js",
   "bin": {
-    "documentor": "./build/cli.js"
+    "documentor": "bin/documentor"
   },
   "scripts": {
     "init": "rimraf .validate.json && rimraf .jshintrc",
@@ -27,6 +27,7 @@
     "precheck": "npm run validate",
     "check": "npm run audit && npm run deps && npm outdated --depth 0"
   },
+  "files": [ "build", "docs", "bin"],
   "devDependencies": {
     "babel": "5.8.21",
     "babel-eslint": "4.0.5",

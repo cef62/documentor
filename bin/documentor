@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+/*eslint-disable */
+
+var yargs = require('yargs');
+var path = require('path');
+var slash = require('slash');
+
+var documentor = require('../build/documentor');
+var getDefaultOptions = require('../build/config/defaults').getDefaultOptions;
+
+var config = yargs.argv.config;
+var options;
+var fullPath;
+
+if (config) {
+  try {
+    fullPath = slash(path.resolve(process.cwd(), config));
+    options = require(fullPath);
+  } catch (err) {
+    // console.error(err);
+    throw new Error('Documentor CLI expect a valid path to a config modules, received: ' +fullPath);
+  }
+} else {
+  options = getDefaultOptions();
+}
+
+documentor(options);
+
+/*eslint-enable */
