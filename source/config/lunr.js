@@ -6,10 +6,11 @@ import lunrNo from 'lunr-languages/lunr.it';
 lunrStemmerSupport(lunr);
 lunrNo(lunr);
 
-export default function configureLunr() {
+export default function configureLunr(options = {}) {
+  const { id: ref } = options;
   return mLunr({
-    // ref: 'id', // important: use default (filePath) to match with
-    // lunr-metadata-store
+    // important: use default (filePath) to match with lunr-metadata-store
+    ref,
     indexPath: 'index.json',
     fields: {
       title: 1,

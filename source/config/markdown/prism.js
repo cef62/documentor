@@ -3,6 +3,7 @@ import prism from 'prismjs';
 const prismExtensions = {
   js: 'javascript',
   scss: 'css',
+  less: 'css',
   sass: 'css',
   html: 'markup',
   svg: 'markup',
@@ -41,6 +42,9 @@ export function highlightMarkdown(code, lang) {
   let usedLang = 'markup';
   if (!prism.languages.hasOwnProperty(lang)) {
     usedLang = prismExtensions[lang];
+  }
+  if (!usedLang) {
+    usedLang = 'markup';
   }
   return prism.highlight(code, prism.languages[usedLang]);
 }

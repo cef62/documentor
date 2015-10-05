@@ -10,7 +10,7 @@ import customListStyle from './markdown-it-custom-list-style';
 import cx from './markdown-it-container-cx';
 import spoiler from './markdown-it-container-spoiler';
 
-export default function configureMarkdown(macros = {}, styles = [], extraPlugins = []) {
+export default function configureMarkdown({ macros = {}, customList = [], extra = [] } = {}) {
   const md = markdown({
     html: true,
     highlight: highlightMarkdown,
@@ -41,11 +41,11 @@ export default function configureMarkdown(macros = {}, styles = [], extraPlugins
   .use( mdCheckbox ) // vedi opzioni per aggiungere custom classes
   .use( mdMacros, macros );
 
-  // styles must be an array of objects
-  styles.forEach( style => md.parser.use(customListStyle, style) );
+  // customList must be an array of objects
+  customList.forEach( style => md.parser.use(customListStyle, style) );
 
-  // extraPlugins must be an array of array
-  extraPlugins.forEach( plugin => md.parser.use(...plugin) );
+  // extra must be an array of array
+  extra.forEach( plugin => md.parser.use(...plugin) );
 
   configurePrism(md.parser);
 

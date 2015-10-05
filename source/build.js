@@ -1,135 +1,73 @@
-import path from 'path';
+import {
+  getDefaultOptions,
+  SOURCE_FOLDER, BUILD_FOLDER,
+  BABEL_OPTIONS, MARKDOWN_OPTIONS, META_OPTIONS,
+  REPLACE_PATTERNS_OPTIONS, NAVIGATION_OPTIONS, LUNR_OPTIONS,
+} from './config/defaults';
 
-import metalsmith from 'metalsmith';
-import assets from 'metalsmith-assets';
-import draft from 'metalsmith-drafts';
-import babel from 'metalsmith-babel';
+import documentor from './documentor';
 
-import replace from './config/text-replace';
+export default function buildDocumentor() {
+  let _options = getDefaultOptions();
 
-import templates from './config/templates';
-import navigation from './config/navigation';
-
-import markdown from './config/markdown';
-import markdownInlineMacros from './config/markdown/inline-macros';
-
-import composeMeta from './config/meta';
-import configureLunr from './config/lunr';
-import lunrMetadataStore from './config/metalsmith-lunr-metadata-store';
-
-// ************************************************************
-// Configure Navigation
-// ************************************************************
-
-// TODO: pass values from outside, if any
-const navTask = navigation();
-
-// ************************************************************
-// Configure assets path mapping
-// ************************************************************
-
-// TODO: configure from outside, if required
-const assetsTask = assets({
-  source: './assets',
-  destination: './assets',
-});
-
-
-// ************************************************************
-// Set handlebar as template engine
-// ************************************************************
-
-const templatesTask = templates();
-
-// ************************************************************
-// Configure metadata
-// ************************************************************
-
-// TODO: pass values from outside, if any
-const meta = composeMeta();
-
-// ************************************************************
-// manual patterns substitution
-// ************************************************************
-
-// TODO: pass values from outside, if any
-const replaceTask = replace();
-
-// ************************************************************
-// Configure Markdow parser
-// ************************************************************
-
-const customListStyle = {
-  classes: {
-    ul: ['parent-list', 'pippo'],
-    li: ['child-item'],
-  },
-  styles: {
-    ul: {
-      ['font-size']: '30px',
+  return {
+    addStaticAsset(info) {
+      _options.assets.push(info);
+      return this;
     },
-    li: {
-      color: 'red',
-      ['text-decoration']: 'underline',
+
+    configureNavigation(navOptions = NAVIGATION_OPTIONS) {
+      _options.navigation = Object.assign({}, navOptions);
+      return this;
     },
-  },
-  type: 0x2B,
-};
 
-// TODO: pass values from outside, if any
-// TODO: remove test style
-const md = markdown(markdownInlineMacros, [ customListStyle ]);
-
-
-// ************************************************************
-// Configure Lunr
-// ************************************************************
-
-const lunr = configureLunr();
-const lunrStore = lunrMetadataStore({
-  fields: {
-    enable: 'lunr',
-    id: null, // null to use file path
-    metadata: {
-      title: 'title',
-      search_url: 'url',
+    configureMeta(meta = META_OPTIONS) {
+      _options.meta = Object.assign({}, meta);
+      return this;
     },
-  },
-});
 
-// ************************************************************
-// Configure babel transpiler
-// ************************************************************
+    configureReplacePatterns(patterns = REPLACE_PATTERNS_OPTIONS) {
+      _options.replace = Object.assign({}, patterns);
+      return this;
+    },
 
-const babelTastk = babel({
-  sourceMaps: true,
-  stage: 0,
-});
+    configureMarkdown({ macros = {}, customList = [] } = MARKDOWN_OPTIONS) {
+      _options.markdown = Object.assign( {}, { macros, customList });
+      return this;
+    },
 
-// ************************************************************
-// Configure metalsmith
-// ************************************************************
+    configureBabel(options = BABEL_OPTIONS) {
+      _options.babel = Object.assign({}, options);
+      return this;
+    },
 
-// TODO: pass values from outside, REQUIRED
-const sourceFolder = path.join(__dirname, 'data');
-const buildFolder = path.join(__dirname, 'build');
+    configureLunr(options = LUNR_OPTIONS) {
+      _options.lunr = Object.assign( {}, options);
+      return this;
+    },
 
-metalsmith( sourceFolder )
-.destination( buildFolder )
-.clean( true )
-.metadata( meta )
-.use( draft() )
-.use( replaceTask )
-.use( md )
-.use( navTask )
-.use( templatesTask )
-.use( assetsTask )
-.use( lunr )
-.use( lunrStore )
-.use( babelTastk )
-.build((err) => {
-  if (err) {
-    throw err;
-  }
-});
+    setSourceFolder(target = SOURCE_FOLDER) {
+      _options.folder.source = target;
+      return this;
+    },
 
+    setBuildFolder(target = BUILD_FOLDER) {
+      _options.folder.build = target;
+      return this;
+    },
+
+    set options(value) {
+      _options = value;
+    },
+    get options() {
+      return _options;
+    },
+
+    run(source, build) {
+      const opt = Object.assign({}, _options);
+      opt.folders.source = source ? source : opt.folders.source;
+      opt.folders.build = build ? build : opt.folders.build;
+      documentor(opt);
+    },
+  };
+}
