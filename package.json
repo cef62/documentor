@@ -1,5 +1,5 @@
 {
-  "name": "dl-documentor",
+  "name": "documentor",
   "description": "Make documentation for DL projects",
   "version": "1.0.0",
   "main": "./source/build.js",
@@ -48,12 +48,12 @@
   "author": "Matteo Ronchi <>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cef62/dl-documentor/issues"
+    "url": "https://github.com/cef62/documentor/issues"
   },
-  "homepage": "https://github.com/cef62/dl-documentor",
+  "homepage": "https://github.com/cef62/documentor",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cef62/dl-documentor.git"
+    "url": "https://github.com/cef62/documentor.git"
   },
   "dependencies": {
     "handlebars": "4.0.3",

@@ -1,5 +1,5 @@
-# dl-documentor [![Circle CI](https://circleci.com/gh/cef62/dl-documentor/tree/master.svg?style=svg)](https://circleci.com/gh/cef62/dl-documentor/tree/master)
-[![Travis-CI](https://travis-ci.org/cef62/dl-documentor.svg)](https://travis-ci.org/cef62/dl-documentor)
+# documentor [![Circle CI](https://circleci.com/gh/cef62/documentor/tree/master.svg?style=svg)](https://circleci.com/gh/cef62/documentor/tree/master)
+[![Travis-CI](https://travis-ci.org/cef62/documentor.svg)](https://travis-ci.org/cef62/documentor)
 
 Make documentation for DL projects
 
