@@ -1,3 +1,5 @@
+import uniq from 'lodash.uniq';
+
 export const PLUS_BULLET = 0x2B;
 export const STAR_BULLET = 0x2A;
 export const MINUS_BULLET = 0x2D;
@@ -5,7 +7,7 @@ export const MINUS_BULLET = 0x2D;
 const isValidType = (type) => type === PLUS_BULLET || type === STAR_BULLET || type === MINUS_BULLET;
 
 
-const defaultRender = (...rest) => rest[rest.length-1].renderToken(...rest);
+const defaultRender = (...rest) => rest[rest.length - 1].renderToken(...rest);
 
 const applyCustomClasses = (token, classes = []) => {
   if (classes.length) {
@@ -13,7 +15,7 @@ const applyCustomClasses = (token, classes = []) => {
     if (aIndex < 0) {
       token.attrPush(['class', classes.join(' ')]);
     } else {
-      let updatedClasses = uniq(token.attrs[aIndex][1].split(' ').concat(classes));
+      const updatedClasses = uniq(token.attrs[aIndex][1].split(' ').concat(classes));
       token.attrs[aIndex][1] = updatedClasses;
     }
   }
@@ -34,11 +36,11 @@ const applyCustomStyles = (token, styles = {}) => {
     } else {
       const currStyles = token.attrs[aIndex][1].split(';')
       .map( (rule) => {
-        const [ key, value ] = rule.trim().split(':').map( s => s.trim() );
+        const [ key, value ] = rule.trim().split(':').map( str => str.trim() );
         return { [key]: value };
       });
       const mergedStyles = Object.assign(currStyles, styles);
-      styleStr = styleMapToString(mergedStyles);
+      const styleStr = styleMapToString(mergedStyles);
       token.attrs[aIndex][1] = styleStr;
     }
   }
@@ -78,9 +80,8 @@ export default function customListStyle(md, rules = {}) {
   md.renderer.rules.list_item_open = (tokens, idx, ...rest) => {
     if (tokens[idx].markup.charCodeAt(0) === type) {
       tokens[idx] = applyCustomClasses(tokens[idx], itemClasses);
-      tokens[idx] = applyCustomStyles(tokens[idx],itemStyles);
+      tokens[idx] = applyCustomStyles(tokens[idx], itemStyles);
     }
     return defaultListItemOpenRender(tokens, idx, ...rest);
   };
-
 }

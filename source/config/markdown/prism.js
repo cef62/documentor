@@ -10,12 +10,12 @@ const prismExtensions = {
   py: 'python',
   rb: 'ruby',
   ps1: 'powershell',
-  psm1: 'powershell'
+  psm1: 'powershell',
 };
 
 const renderCode = (utils) => (tokens, idx, options, env, self) => {
   const { unescapeAll, escapeHtml } = utils;
-  let token = tokens[idx];
+  const token = tokens[idx];
   const info = token.info ? unescapeAll(token.info).trim() : '';
   let langName = 'markup';
   let highlighted;
@@ -34,16 +34,16 @@ const renderCode = (utils) => (tokens, idx, options, env, self) => {
   return {
     highlighted,
     attrs: self.renderAttrs(token),
-  }
+  };
 };
 
 export function highlightMarkdown(code, lang) {
+  let usedLang = 'markup';
   if (!prism.languages.hasOwnProperty(lang)) {
-    // Default to markup if it's not in our extensions.
-    lang = prismExtensions[lang] || 'markup';
+    usedLang = prismExtensions[lang];
   }
-  return prism.highlight(code, prism.languages[lang]);
-};
+  return prism.highlight(code, prism.languages[usedLang]);
+}
 
 export function configurePrism(markdownIt) {
   const { utils } = markdownIt;

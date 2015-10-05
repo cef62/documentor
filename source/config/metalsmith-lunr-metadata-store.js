@@ -27,8 +27,8 @@ export default function lunrMetadataStore({
         const file = files[filepath];
         if (enable === true || file[enable]) {
           const uid = ref ? file[ref] : filepath;
-          acc[uid] = metadataKeys.reduce( (map, k) => {
-            map[metadata[k]] = file[k];
+          acc[uid] = metadataKeys.reduce( (map, key) => {
+            map[metadata[key]] = file[key];
             return map;
           }, {});
           acc[uid].filepath = filepath;

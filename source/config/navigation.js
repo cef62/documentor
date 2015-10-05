@@ -15,5 +15,5 @@ const options = {
   navListProperty: 'navs',
 };
 
-const configureNavigation = (c = config, o = options) => navigation(c, o);
+const configureNavigation = (conf = config, opt = options) => navigation(conf, opt);
 export default configureNavigation;

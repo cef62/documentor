@@ -14,8 +14,8 @@ const cx = {
     .trim()
     .match(/^cx\s+(.*)$/)[1]
     .split(' ')
-    .map( p => p.trim() )
-    .filter( p => p.trim().length );
+    .map( param => param.trim() )
+    .filter( param => param.trim().length );
 
     // accepted params:
     // --inline
@@ -35,27 +35,29 @@ const cx = {
 
     const stylePos = params.indexOf('--style');
     if (stylePos > -1 ) {
-      style = params.splice(stylePos, 2)[1].slice(1,-1);
+      style = params.splice(stylePos, 2)[1].slice(1, -1);
     }
 
+    let rendered;
     if (nesting === 1) {
       // FIXME: workaraound waiting main repo accept pull request to add info
       // to closing tag
-      const searchPattern = type.slice(0,-4);
+      const searchPattern = type.slice(0, -4);
       // look for closing tag
-      const closingToken = tokens.slice(idx + 1).find( t => {
-        return t.type.indexOf(searchPattern) === 0;
+      const closingToken = tokens.slice(idx + 1).find( token => {
+        return token.type.indexOf(searchPattern) === 0;
       });
       closingToken.info = info;
 
       const classes = params.join(' ');
       const styleAttr = style ? `style="${style}"` : '';
-      return `<${tag} class="${classes}" ${styleAttr}>`;
+      rendered = `<${tag} class="${classes}" ${styleAttr}>`;
     } else {
       // closing tag
-      return `</${tag}>${inline}`;
+      rendered = `</${tag}>${inline}`;
     }
-  }
+    return rendered;
+  },
 };
 
 export default cx;
