@@ -25,7 +25,8 @@
     "deps:missing": "dependency-check package.json",
     "deps:extra": "dependency-check package.json --extra --no-dev --ignore",
     "precheck": "npm run validate",
-    "check": "npm run audit && npm run deps && npm outdated --depth 0"
+    "check": "npm run audit && npm run deps && npm outdated --depth 0",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "babel": "5.8.21",
